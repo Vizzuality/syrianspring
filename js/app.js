@@ -3,7 +3,9 @@ var userName = 'viz2';
 var CartoDB = Backbone.CartoDB({ user: userName });
 
 var ConflictMap = CartoDB.CartoDBModel.extend({
+
   ANIMATION_TIME: 3600*4*100000,
+
   getPos: function() {
     var coords = $.parseJSON(this.get('position')).coordinates;
     return new MM.Location(coords[1], coords[0]);
@@ -23,15 +25,14 @@ var ConflictMap = CartoDB.CartoDBModel.extend({
     return 0;
   },
   opacity: function(t) {
-    var dt = t - this.time.getTime();
-    var interpol_time = this.ANIMATION_TIME*1.2;
-    if(dt > 0 && dt < interpol_time) {
-      var a= (1 - dt/interpol_time);
-      return Math.max(0, a*a)*0.5;
-    }
-    return 0.0;
+      var dt = t - this.time.getTime();
+      var interpol_time = this.ANIMATION_TIME*1.2;
+      if(dt > 0 && dt < interpol_time) {
+          var a= (1 - dt/interpol_time);
+          return Math.max(0, a*a)*0.5;
+      }
+      return 0;
   }
-
 });
 
 var ConflictMaps = CartoDB.CartoDBCollection.extend({
@@ -195,8 +196,6 @@ Overlay.prototype = {
       var o = b.data.opacity(self.time);
       return "fill: #FF9900; fill-opacity: " + o + "; stroke-opacity: " + o;
     });
-
-
     var offset = Math.ceil(262 * (self.time - this.conflictmaps.first().time.getTime()) / (this.conflictmaps.last().time.getTime() - this.conflictmaps.first().time.getTime()))
     $('#play_button').css('left', offset+"px");
   }
@@ -204,57 +203,45 @@ Overlay.prototype = {
 
 
 function initMap(type) {
-  var map;
+    var map;
+ 
+    clock.setId('clock');
 
-  clock.setId('clock');
-  // create map
-  var src = document.getElementById('src');
-  template = 'http://tile.stamen.com/toner/{Z}/{X}/{Y}.jpg';
-  template = 'http://{S}tiles.mapbox.com/v3/cartodb.map-u6vat89l/{Z}/{X}/{Y}.png';
-  var subdomains = [ 'a.', 'b.', 'c.' ];
-  var provider = new MM.TemplatedLayer(template, subdomains);
+    // create map
+    var src = document.getElementById('src');
+    template = 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png';
+    var subdomains = [ 'a.', 'b.', 'c.' ];
+    var provider = new MM.TemplatedLayer(template, subdomains);
+ 
+    map = new MM.Map(document.getElementById('map'), provider);
+    
+    if (type=='replay'){
+        var conflictmaps = new ConflictMaps();
+    
+        var setup_layer = function() {
+          var f = new Overlay(map, conflictmaps);
+          var to = 0;
+          var ai=null;
+          f.graph('death_toll')
+          var moveMap = setInterval(function() {
 
-  map = new MM.Map(document.getElementById('map'), provider);
-
-  if (type=='replay'){
-    var conflictmaps = new ConflictMaps();
-
-    var setup_layer = function() {
-      var f = new Overlay(map, conflictmaps);
-      var to = 0;
-      var ai=null;
-      f.graph('death_toll')
-      var moveMap = setInterval(function() {
-
-        //f.time += 30000;
-        var of = f.time;
-        f.setTime(30000000);
-        if (f.time<of){
-          //f.setTime()
-          f.time = this.conflictmaps.first().time.getTime();
-          //window.location.reload();
-        }
-        //clock.set(new Date(f.time));
-        f.draw(map);
-      },20);
-    };
-
-    // fetch all data
-    conflictmaps.bind('reset', setup_layer);
-    conflictmaps.fetch();
-    var zoom = 14;
-  }
-
-  if (type=='live'){
-    console.log('live')
-    var tweets = new MM.Layer(new MM.TemplatedMapProvider("https://osm2.cartodb.com/tiles/conftwit/{Z}/{X}/{Y}.png?sql=WITH m AS (SELECT min(extract('epoch' from now()) - extract('epoch' from sent)) m FROM conftwit) SELECT *, (extract('epoch' from now()) - extract('epoch' from sent))-m age FROM conftwit,m order by age desc"));
-      map.insertLayerAt(1, tweets);
-      var zoom = 15;
-  }
-
-  map.setCenterZoom(new MM.Location(34.626932,36.76869), 7);
-  var hash = new MM.Hash(map);
-
+            var of = f.time;
+            f.setTime(30000000);
+            if (f.time<of){
+                f.time = this.conflictmaps.first().time.getTime();
+            }
+            f.draw(map);
+          },20);
+        };
+ 
+        // fetch all data
+        conflictmaps.bind('reset', setup_layer);
+        conflictmaps.fetch();
+        var zoom = 14;
+    }
+    
+    map.setCenterZoom(new MM.Location(34.626932,36.76869), 6);
+    var hash = new MM.Hash(map);
 }
 
 
