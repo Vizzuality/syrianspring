@@ -99,3 +99,15 @@ path {stroke-width: 1;fill: none;}
 .data1 {stroke: #FF9900;}
 .data2 {stroke: #eb0d4d;}
 
+@-webkit-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-moz-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-ms-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-o-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+
+.opacity {
+  -webkit-animation: Opacity 500ms ease-in-out 200ms;
+  -moz-animation: Opacity 500ms ease-in-out 200ms;
+  -o-animation: Opacity 500ms ease-in-out 200ms;
+  animation: Opacity 500ms ease-in-out 200ms;
+}
