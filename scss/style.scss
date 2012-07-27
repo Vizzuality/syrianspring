@@ -1,4 +1,5 @@
 @import "compass/reset";
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #242424; }
 
 body { font-family: "Helvetica Neue", "Helvetica", Arial; }
 body div#map { width: 100%; height: 100%; }
@@ -45,3 +46,8 @@ body aside section.types ul li a.selected { color: #FF3366; text-decoration: non
 body aside section.types ul li a.selected:hover { color: #FF3366; text-decoration: none; }
 
 .lt-ie9 div#tooltip span.arrow { bottom: -9px; }
+
+
+a.cartodb_logo {position:absolute; bottom:8px; left:75px; display:block; width:69px; height:27px; background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
+        text-indent:-9999px; line-height:0; font-size:0;}
+div.torque_time {position:absolute; bottom:28px; right:15px; display:block; width:189px; height:27px;}
