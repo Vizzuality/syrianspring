@@ -336,6 +336,7 @@ function initMap() {
   // Fetch all data
   conflictmaps.bind('reset', onDataLoaded);
   conflictmaps.fetch();
+
 }
 
 function onDataLoaded() {
