@@ -1,33 +1,60 @@
 @import "compass/reset";
+@import "compass/css3";
+@import "helpers";
+
 html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #242424; }
 
-body { font-family: "Helvetica Neue", "Helvetica", Arial; }
-body div#map { width: 100%; height: 100%; }
-body div#tooltip { position: absolute; display: none; left: 0; top: 0; padding: 20px; width: 151px; -moz-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -webkit-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -o-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; background: white; z-index: 10; }
-body div#tooltip h3 { display: block; font: bold 11px "Helvetica Neue", "Helvetica", Arial; color: #FF3366; text-transform: uppercase; }
-body div#tooltip h2 { display: block; width: 100%; padding: 4px 0 14px 0; font: bold 21px "Helvetica Neue", "Helvetica", Arial; line-height: 23px; color: #333333; border-bottom: 2px solid #FF3366; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; }
-body div#tooltip p { display: block; margin: 18px 0 0 0; font: normal 14px "Helvetica Neue", "Helvetica", Arial; color: #666666; }
-body div#tooltip span.cash { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; vertical-align: middle; height: 14px; width: 9px; margin: 6px 0 0 0; background: url("../img/cash.png") repeat 0 0; }
-body div#tooltip span.cash { *display: inline; }
-body div#tooltip span.arrow { position: absolute; bottom: -10px; left: 50%; margin: 0 0 0 -5px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid white; }
+body { font-family: "Helvetica", "Helvetica", Arial; }
 
-body aside { position: fixed; top: 0; bottom: 0; right: 43px; width: 270px; height: 180px; background: none; -moz-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -webkit-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -o-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; z-index: 100; }
-body aside header { position: absolute; top: 0; left: 0; width: 270px; height: 62px; background: url("../img/stripes.png") repeat 0 0 #333; border-bottom: 2px solid  rgba(222, 222, 222, 0.2);}
+#map { width: 100%; height: 100%; }
 
-body aside header .row { position: relative; float: left; width: 270px; color: white; font-family: "Bank Gothic", "Futura", "Arial"; opacity: .9; margin-left: 0px; }
-body aside header .row .column { position: relative; padding: 15px 14px 15px 14px; float: left; font-size: 15px; text-align: center; }
-body aside header .row .column .value { position: relative; font-size: 35px; margin-bottom: 5px}
-body aside header .row .column .title { position: relative;  opacity: .6;}
-body aside header .row .verticle { position: relative; float: left; height: 62px; width: 2px; background: #000;}
-body aside section #death_toll{
-    position: absolute; top: 68px; left: 0; width: 100%; height: 100px; background: transparent;
+#tooltip {
+  position: absolute; display: none; left: 0; top: 0; padding: 20px; width: 151px; -moz-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -webkit-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -o-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; background: white; z-index: 10;
+
+  h3 { display: block; font: bold 11px "Helvetica", "Helvetica", Arial; color: #FF3366; text-transform: uppercase; }
+  h2 { display: block; width: 100%; padding: 4px 0 14px 0; font: bold 21px "Helvetica", "Helvetica", Arial; line-height: 23px; color: #333333; border-bottom: 2px solid #FF3366; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; }
+  p { display: block; margin: 18px 0 0 0; font: normal 14px "Helvetica", "Helvetica", Arial; color: #666666; }
+  span.cash { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; vertical-align: middle; height: 14px; width: 9px; margin: 6px 0 0 0; background: url("../img/cash.png") repeat 0 0; }
+  span.cash { *display: inline; }
+  span.arrow { position: absolute; bottom: -10px; left: 50%; margin: 0 0 0 -5px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid white; }
 }
-body aside section #scroll_bar{
-    position: absolute; top: 170px; left: 0; width: 100%; height: 8px; background: transparent;
+
+/*aside {
+  position: fixed; top: 0; bottom: 0; right: 43px; width: 270px; height: 180px; background: none; -moz-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -webkit-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; -o-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px; z-index: 100;
+
+  header { position: absolute; top: 0; left: 0; width: 270px; height: 62px; background: url("../img/stripes.png") repeat 0 0 #333; border-bottom: 2px solid  rgba(222, 222, 222, 0.2);}
+
+  header .row { position: relative; float: left; width: 270px; color: white; font-family: "Bank Gothic", "Futura", "Arial"; opacity: .9; margin-left: 0px; }
+  header .row .column { position: relative; padding: 15px 14px 15px 14px; float: left; font-size: 15px; text-align: center; }
+  header .row .column .value { position: relative; font-size: 35px; margin-bottom: 5px}
+  header .row .column .title { position: relative;  opacity: .6;}
+  header .row .verticle { position: relative; float: left; height: 62px; width: 2px; background: #000;}
+
+  section #death_toll{ position: absolute; top: 68px; left: 0; width: 100%; height: 100px; background: transparent; }
+  section #scroll_bar{ position: absolute; top: 170px; left: 0; width: 100%; height: 8px; background: transparent; }
+  section #scroll_bar #play_button{ position: absolute; top: 0px; left: 0; width: 8px; height: 8px; background: #b90b77; -moz-border-radius: 3px; border-radius: 3px; }
 }
-body aside section #scroll_bar #play_button{
-    position: absolute; top: 0px; left: 0; width: 8px; height: 8px; background: #b90b77; -moz-border-radius: 3px; border-radius: 3px;
+
+aside {
+  h3 { display: block; font: bold 11px "Helvetica", "Helvetica", Arial; color: #FF3366; text-transform: uppercase; }
+
+  section.types {
+    position: absolute; top: 248px; bottom: 125px; left: 0; width: 200px; padding: 5px 0 20px; overflow-x: visible; overflow-y: auto; outline: none;
+
+    ul { display: block; padding: 0; }
+    ul li { margin: 15px 0 0 0; }
+    ul li a { display: block; padding: 0 20px; font: bold 11px "Helvetica", "Helvetica", Arial; color: #666666; text-decoration: none; text-transform: uppercase; }
+    ul li a:hover { color: #333333; text-decoration: underline; cursor: pointer; }
+    ul li a.selected { color: #FF3366; text-decoration: none; background: url("../img/list.png") no-repeat 9px 6px; list-style: square; }
+    ul li a.selected:hover { color: #FF3366; text-decoration: none; }
+  }
 }
+*/
+lt-ie9 div#tooltip span.arrow { bottom: -9px; }
+
+a.cartodb_logo {position:absolute; bottom:8px; left:75px; display:block; width:69px; height:27px; background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
+text-indent:-9999px; line-height:0; font-size:0;}
+div.torque_time {position:absolute; bottom:28px; right:15px; display:block; width:189px; height:27px;}
 
 /* tell the SVG path to be a thin blue line without any area fill */
 path {stroke-width: 1;fill: none;}
@@ -36,18 +63,27 @@ path {stroke-width: 1;fill: none;}
 
 
 
-body aside h3 { display: block; font: bold 11px "Helvetica Neue", "Helvetica", Arial; color: #FF3366; text-transform: uppercase; }
-body aside section.types { position: absolute; top: 248px; bottom: 125px; left: 0; width: 200px; padding: 5px 0 20px; overflow-x: visible; overflow-y: auto; outline: none; }
-body aside section.types ul { display: block; padding: 0; }
-body aside section.types ul li { margin: 15px 0 0 0; }
-body aside section.types ul li a { display: block; padding: 0 20px; font: bold 11px "Helvetica Neue", "Helvetica", Arial; color: #666666; text-decoration: none; text-transform: uppercase; }
-body aside section.types ul li a:hover { color: #333333; text-decoration: underline; cursor: pointer; }
-body aside section.types ul li a.selected { color: #FF3366; text-decoration: none; background: url("../img/list.png") no-repeat 9px 6px; list-style: square; }
-body aside section.types ul li a.selected:hover { color: #FF3366; text-decoration: none; }
+aside {
+  @include size(207px, 304px);
+  @include position(15px, false, false, 15px);
 
-.lt-ie9 div#tooltip span.arrow { bottom: -9px; }
+  padding: 20px;
 
+  background: #fff;
+  @include border-radius(5px);
 
-a.cartodb_logo {position:absolute; bottom:8px; left:75px; display:block; width:69px; height:27px; background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
-        text-indent:-9999px; line-height:0; font-size:0;}
-div.torque_time {position:absolute; bottom:28px; right:15px; display:block; width:189px; height:27px;}
+  h1 {
+    font-size: 21px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+  }
+
+  #clock {
+    font-size: 15px;
+    font-weight: bold;
+    color: $cGray3;
+
+    .column { display: inline; }
+  }
+
+}
