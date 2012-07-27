@@ -12,7 +12,7 @@ var config = {
     lat:  34,
     lng:  35,
     zoom: 6,
-    template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
+    template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png'
   },
   graph: {
     width: 164,
@@ -385,4 +385,3 @@ function start() {
     renderLoop();
   })();
 }
-
