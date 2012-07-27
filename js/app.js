@@ -321,18 +321,21 @@ var Clock = Class.extend({
   }
 });
 
+// Method to build the map
 function initMap() {
 
   var
   src             = document.getElementById('src'),
   subdomains      = [ 'a.', 'b.', 'c.' ],
+  location        = new MM.Location(config.map.lat, config.map.lng),
   baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
   intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate));
 
+  // Create the map with the base layer
   map = new MM.Map(document.getElementById(config.map.id), baseLayer);
-  map.setCenterZoom(new MM.Location(config.map.lat, config.map.lng), config.map.zoom);
+  map.setCenterZoom(location, config.map.zoom);
 
-  // Adds intersection layer
+  // Adds the intersection layer
   map.insertLayerAt(1, intersectsLayer);
 
   conflictmaps = new ConflictMaps();
@@ -343,6 +346,7 @@ function initMap() {
 
 }
 
+// onDataLoaded callback
 function onDataLoaded() {
 
   overlay  = new Overlay(map, conflictmaps);
@@ -359,6 +363,7 @@ function onDataLoaded() {
 
 }
 
+// Drawing loop
 function renderLoop() {
 
   var of = overlay.time;
@@ -378,8 +383,9 @@ function start() {
   clock.setId('clock');
 
   playButton = document.getElementById('play');
-  playButton.className = "fadeOut";
-  playButton.onclick = "";
+  playButton.className   = "fadeOut";
+  playButton.onclick     = "";
+  playButton.onmouseover = function() { this.style.cursor = 'default'; }
 
   progressLine = document.getElementById('progress');
   progressLine.className = "fadeIn";
