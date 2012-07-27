@@ -18,6 +18,8 @@ body { font-family: "Helvetica", "Helvetica", Arial; }
 }
 
 aside {
+  opacity: 0;
+
   $padding: 20px;
   @include size(207px - $padding*2, 304px - $padding*2);
   @include position(15px, false, false, 15px);
@@ -89,7 +91,6 @@ aside {
       &.civilian { @include icons-sprite(bullet-yellow, $offset-y: 3px); }
       &.children { @include icons-sprite(bullet-pink,   $offset-y: 3px); }
     }
-
   }
 }
 
@@ -99,15 +100,39 @@ path {stroke-width: 1;fill: none;}
 .data1 {stroke: #FF9900;}
 .data2 {stroke: #eb0d4d;}
 
-@-webkit-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
-@-moz-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
-@-ms-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
-@-o-keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
-@keyframes Opacity { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-webkit-keyframes fadeIn { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-moz-keyframes fadeIn    { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-ms-keyframes fadeIn     { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@-o-keyframes fadeIn      { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes fadeIn         { 0%   { opacity: 0; } 50%  { opacity: 0.5; } 100% { opacity: 1; } }
 
-.opacity {
-  -webkit-animation: Opacity 500ms ease-in-out 200ms;
-  -moz-animation: Opacity 500ms ease-in-out 200ms;
-  -o-animation: Opacity 500ms ease-in-out 200ms;
-  animation: Opacity 500ms ease-in-out 200ms;
+@-webkit-keyframes fadeOut { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
+@-moz-keyframes fadeOut    { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
+@-ms-keyframes fadeOut     { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
+@-o-keyframes fadeOut      { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
+@keyframes fadeOut         { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
+
+.fadeIn {
+  -webkit-animation: fadeIn 500ms ease-in-out 500ms;
+  -moz-animation:    fadeIn 500ms ease-in-out 500ms;
+  -o-animation:      fadeIn 500ms ease-in-out 500ms;
+  animation:         fadeIn 500ms ease-in-out 500ms;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.fadeOut {
+  -webkit-animation: fadeOut 200ms ease-in-out;
+  -moz-animation:    fadeOut 200ms ease-in-out;
+  -o-animation:      fadeOut 200ms ease-in-out;
+  animation:         fadeOut 200ms ease-in-out;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
 }

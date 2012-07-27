@@ -225,7 +225,7 @@ function start(type) {
   clock.setId('clock');
 
   var play = document.getElementById('play');
-  play.className = "hidden";
+  play.className = "fadeOut";
 
   var progress = document.getElementById('progress');
   progress.className = "show";
