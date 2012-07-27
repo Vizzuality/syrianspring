@@ -331,6 +331,9 @@ function initMap() {
   map = new MM.Map(document.getElementById(config.map.id), provider);
   map.setCenterZoom(new MM.Location(config.map.lat, config.map.lng), config.map.zoom);
 
+  var layer_adm = new MM.Layer(new MM.TemplatedMapProvider('http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png'));
+  map.insertLayerAt(1, layer_adm);
+
   conflictmaps = new ConflictMaps();
 
   // Fetch all data
