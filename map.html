@@ -22,25 +22,25 @@
 
 
   </head>
-  <body onload="initMap('replay')">
+  <body onload="initMap();">
     <div id="map"></div>
 
     <aside>
     <h1>Arab Spring conflicts civilian casualties</h1>
 
     <div id="clock">
-        <span class="value day">01</span>/<span class="value month">01</span>/<span class="value year">2001</span>
+      <span class="value day">01</span>/<span class="value month">01</span>/<span class="value year">2001</span>
     </div>
 
     <div id="graph">
-      <div id="play_button"></div>
+      <div id="progress"></div>
+      <a href="#" id="play" onclick="start('replay');"></a>
     </div>
 
     <ul class="legend">
       <li class="civilian">civilian casualities</li>
       <li class="children">children (<18) killed</li>
     </ul>
-
 
     </aside>
 

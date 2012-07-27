@@ -1,12 +1,14 @@
 var
-userName = 'viz2',
+conflictmaps,
+map      = null,
 config   = {
+  username: 'viz2',
   lat:  34,
-  lng:  33,
+  lng:  35,
   zoom: 6
 };
 
-var CartoDB = Backbone.CartoDB({ user: userName });
+var CartoDB = Backbone.CartoDB({ user: config.username });
 
 var ConflictMap = CartoDB.CartoDBModel.extend({
 
@@ -31,13 +33,13 @@ var ConflictMap = CartoDB.CartoDBModel.extend({
     return 0;
   },
   opacity: function(t) {
-      var dt = t - this.time.getTime();
-      var interpol_time = this.ANIMATION_TIME*1.2;
-      if(dt > 0 && dt < interpol_time) {
-          var a= (1 - dt/interpol_time);
-          return Math.max(0, a*a)*0.5;
-      }
-      return 0;
+    var dt = t - this.time.getTime();
+    var interpol_time = this.ANIMATION_TIME*1.2;
+    if(dt > 0 && dt < interpol_time) {
+      var a= (1 - dt/interpol_time);
+      return Math.max(0, a*a)*0.5;
+    }
+    return 0;
   }
 });
 
@@ -203,51 +205,55 @@ Overlay.prototype = {
       return "fill: #FF9900; fill-opacity: " + o + "; stroke-opacity: " + o;
     });
     var offset = Math.ceil(262 * (self.time - this.conflictmaps.first().time.getTime()) / (this.conflictmaps.last().time.getTime() - this.conflictmaps.first().time.getTime()))
-    $('#play_button').css('left', offset+"px");
+    $('#progress').css('left', offset+"px");
   }
 }
 
+function initMap() {
+  var src = document.getElementById('src');
+  template = 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png';
+  var subdomains = [ 'a.', 'b.', 'c.' ];
+  var provider = new MM.TemplatedLayer(template, subdomains);
 
-function initMap(type) {
-    var map;
+  map = new MM.Map(document.getElementById('map'), provider);
+  map.setCenterZoom(new MM.Location(config.lat, config.lng), config.zoom);
+  var hash = new MM.Hash(map);
+}
 
-    clock.setId('clock');
+function start(type) {
 
-    // create map
-    var src = document.getElementById('src');
-    template = 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png';
-    var subdomains = [ 'a.', 'b.', 'c.' ];
-    var provider = new MM.TemplatedLayer(template, subdomains);
+  clock.setId('clock');
 
-    map = new MM.Map(document.getElementById('map'), provider);
+  var play = document.getElementById('play');
+  play.className = "hidden";
 
-    if (type=='replay'){
-        var conflictmaps = new ConflictMaps();
+  var progress = document.getElementById('progress');
+  progress.className = "show";
 
-        var setup_layer = function() {
-          var f = new Overlay(map, conflictmaps);
-          var to = 0;
-          var ai=null;
-          f.graph('graph')
-          var moveMap = setInterval(function() {
+  if (type=='replay'){
+    conflictmaps = new ConflictMaps();
 
-            var of = f.time;
-            f.setTime(30000000);
-            if (f.time<of){
-                f.time = this.conflictmaps.first().time.getTime();
-            }
-            f.draw(map);
-          },20);
-        };
+    var setup_layer = function() {
+      var f = new Overlay(map, conflictmaps);
+      var to = 0;
+      var ai=null;
+      f.graph('graph')
+      var moveMap = setInterval(function() {
 
-        // fetch all data
-        conflictmaps.bind('reset', setup_layer);
-        conflictmaps.fetch();
-        var zoom = 14;
-    }
+        var of = f.time;
+        f.setTime(30000000);
+        if (f.time<of){
+          f.time = this.conflictmaps.first().time.getTime();
+        }
+        f.draw(map);
+      },20);
+    };
 
-    map.setCenterZoom(new MM.Location(config.lat, config.lng), config.zoom);
-    var hash = new MM.Hash(map);
+    // fetch all data
+    conflictmaps.bind('reset', setup_layer);
+    conflictmaps.fetch();
+  }
+
 }
 
 

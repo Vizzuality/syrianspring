@@ -46,17 +46,34 @@ aside {
     height: 120px;
     margin: 0 0 15px 0;
 
+    overflow: hidden;
+
     background: transparent;
     border-top: 1px solid $cGray4;
   }
 
-  #play_button{
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    width: 1px;
-    height: 120px;
+  #progress {
+    display:none;
+
+    @include size(1px, 120px);
+    @include position(false, false, 0, 0);
+
     background: url(../img/line.png);
+
+    &.show { display: block; }
+  }
+
+  #play {
+    $width: 107px;
+    $height: 64px;
+
+    @include absolute-center($width, $height);
+    @include icons-sprite(play);
+
+    &:hover  { @include icons-sprite(play_hover);}
+    &:hover:active { @include icons-sprite(play_active); }
+
+    &.hidden { display: none; }
   }
 
   .legend {

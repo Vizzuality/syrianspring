@@ -1,4 +1,4 @@
-/* Colors */
+// Colors
 
 $cWhite:                 #FFFFFF;
 $cGray5:                 #F1F1F1;
@@ -7,6 +7,17 @@ $cGray3:                 #999999;
 $cGray2:                 #666666;
 $cGray1:                 #333333;
 $cGray0:                 #000000;
+
+// Sprites
+$icons-bullet-orange-spacing: 30px;
+$icons-bullet-yellow-spacing: 30px;
+$icons-play-spacing:          20px;
+$icons-play_hover-spacing:    20px;
+$icons-play_active-spacing:   20px;
+
+@import "icons/*.png"; /**/
+
+// Mixins
 
 @mixin size($width, $height:$width) {
 
@@ -26,8 +37,26 @@ $cGray0:                 #000000;
 
 }
 
-$icons-bullet-orange-spacing: 20px;
-$icons-bullet-yellow-spacing: 20px;
+@mixin absolute-vertical-center($width) {
+  position:absolute;
+  left:50%;
+  width: $width;
+  margin-left: -1*$width / 2;
+}
 
-@import "icons/*.png"; /**/
+@mixin absolute-center($width, $height) {
+  position:absolute;
+  left:50%;
+  top: 50%;
+  margin-left: -1*$width / 2;
+  margin-top:  -1*$height / 2;
+  width: $width;
+  height: $height;
+}
+
+@mixin clearfix() {
+  & { *zoom: 1; }
+  &:before, &:after { content: ""; display: table; }
+  &:after { clear: both; }
+}
 
