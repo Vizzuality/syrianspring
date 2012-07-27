@@ -1,8 +1,10 @@
 var
 conflictmaps,
-map      = null,
-overlay  = null,
-config   = {
+map        = null,
+overlay    = null,
+playButton = null;
+
+var config = {
   username: 'viz2',
   map: {
     id: 'map',
@@ -295,9 +297,19 @@ function loadGraph() {
   overlay  = new Overlay(map, conflictmaps);
   overlay.graph('graph')
 
+
+  graph = document.getElementById('graph');
+  graph.className = "fadeIn";
+
+  playButton = document.getElementById('play');
+  playButton.className = "fadeIn";
+
 }
 
 function renderLayer() {
+
+  playButton.onclick = "";
+  playButton.onmouseover = function() { this.style.cursor='default'; }
 
   var moveMap = setInterval(function() {
 
@@ -319,8 +331,8 @@ function start(type) {
 
   clock.setId('clock');
 
-  var play = document.getElementById('play');
-  play.className = "fadeOut";
+  playButton = document.getElementById('play');
+  playButton.className = "fadeOut";
 
   var progress = document.getElementById('progress');
   progress.className = "show";

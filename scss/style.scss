@@ -44,6 +44,8 @@ aside {
   }
 
   #graph {
+    opacity: 0;
+
     position:relative;
     height: 120px;
     margin: 0 0 15px 0;
@@ -68,6 +70,8 @@ aside {
   #play {
     $width: 107px;
     $height: 64px;
+
+    opacity:0;
 
     @include absolute-center($width, $height);
     @include icons-sprite(play);
