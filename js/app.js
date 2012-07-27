@@ -19,31 +19,6 @@ var config = {
   }
 };
 
-(function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-              timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
-}());
-
 var CartoDB = Backbone.CartoDB({ user: config.username });
 
 var ConflictMap = CartoDB.CartoDBModel.extend({
@@ -313,15 +288,14 @@ function initMap() {
   conflictmaps = new ConflictMaps();
 
   // Fetch all data
-  conflictmaps.bind('reset', loadGraph);
+  conflictmaps.bind('reset', onDataLoaded);
   conflictmaps.fetch();
 }
 
-function loadGraph() {
+function onDataLoaded() {
 
   overlay  = new Overlay(map, conflictmaps);
   overlay.graph('graph')
-
 
   graph = document.getElementById('graph');
   graph.className = "fadeIn";
@@ -331,30 +305,17 @@ function loadGraph() {
 
 }
 
-function renderLayer() {
+function renderLoop() {
 
-  playButton.onclick = "";
-  //playButton.onmouseover = function() { playButton.style.cursor='default'; }
+  var of = overlay.time;
 
- (function animloop(){
-      requestAnimationFrame(animloop);
-      render();
-    })();
+  overlay.setTime(30000000);
 
-}
+  if (overlay.time < of) {
+    overlay.time = this.conflictmaps.first().time.getTime();
+  }
 
-function render() {
-
-    var of = overlay.time;
-
-    overlay.setTime(30000000);
-
-    if (overlay.time < of) {
-      overlay.time = this.conflictmaps.first().time.getTime();
-    }
-
-    overlay.draw(map);
-
+  overlay.draw(map);
 }
 
 function start(type) {
@@ -363,13 +324,18 @@ function start(type) {
 
   playButton = document.getElementById('play');
   playButton.className = "fadeOut";
+  playButton.onclick = "";
 
   var progress = document.getElementById('progress');
   progress.className = "show";
 
-  renderLayer();
-}
+  // Main loop
+  (function animloop(){
+    requestAnimationFrame(animloop);
+    renderLoop();
+  })();
 
+}
 
 var Clock = Class.extend({
   init: function(){
