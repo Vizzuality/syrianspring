@@ -1,4 +1,10 @@
-var userName = 'viz2';
+var
+userName = 'viz2',
+config   = {
+  lat:  34.626932,
+  lng:  36.76869,
+  zoom: 6
+};
 
 var CartoDB = Backbone.CartoDB({ user: userName });
 
@@ -124,8 +130,8 @@ Overlay.prototype = {
     var data = this.conflictmaps.getDeathToll(endTime+10000);
     var timeStep = 300;
     var m = [0, 0, 0, 0]; // margins
-    var w = 270 - m[1] - m[3];	// width
-    var h = 100 - m[0] - m[2]; // height
+    var w = 164 - m[1] - m[3];	// width
+    var h = 120 - m[0] - m[2]; // height
     var x = d3.time.scale().domain([startTime, endTime]).range([0, w]);
     var y = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([h, 0]);
     // create a line function that can convert data[] into x and y points
@@ -204,7 +210,7 @@ Overlay.prototype = {
 
 function initMap(type) {
     var map;
- 
+
     clock.setId('clock');
 
     // create map
@@ -212,17 +218,17 @@ function initMap(type) {
     template = 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png';
     var subdomains = [ 'a.', 'b.', 'c.' ];
     var provider = new MM.TemplatedLayer(template, subdomains);
- 
+
     map = new MM.Map(document.getElementById('map'), provider);
-    
+
     if (type=='replay'){
         var conflictmaps = new ConflictMaps();
-    
+
         var setup_layer = function() {
           var f = new Overlay(map, conflictmaps);
           var to = 0;
           var ai=null;
-          f.graph('death_toll')
+          f.graph('graph')
           var moveMap = setInterval(function() {
 
             var of = f.time;
@@ -233,14 +239,14 @@ function initMap(type) {
             f.draw(map);
           },20);
         };
- 
+
         // fetch all data
         conflictmaps.bind('reset', setup_layer);
         conflictmaps.fetch();
         var zoom = 14;
     }
-    
-    map.setCenterZoom(new MM.Location(34.626932,36.76869), 6);
+
+    map.setCenterZoom(new MM.Location(config.lat, config.lng), config.zoom);
     var hash = new MM.Hash(map);
 }
 
