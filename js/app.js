@@ -294,6 +294,9 @@ function initMap() {
 
 function onDataLoaded() {
 
+  var spinner = document.getElementById('spinner');
+  spinner.className = "fadeOut";
+
   overlay  = new Overlay(map, conflictmaps);
   overlay.graph('graph')
 

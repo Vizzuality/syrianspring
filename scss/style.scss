@@ -43,6 +43,11 @@ aside {
     color: $cGray3;
   }
 
+  #spinner {
+    @include absolute-center(24px, 24px);
+    background: url(../img/spinner.gif) no-repeat;
+  }
+
   #graph {
     opacity: 0;
 
