@@ -12,7 +12,8 @@ var config = {
     lat:  34,
     lng:  35,
     zoom: 6,
-    template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png'
+    baseTemplate:       'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
+    intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png'
   },
   graph: {
     width: 164,
@@ -323,22 +324,23 @@ var Clock = Class.extend({
 function initMap() {
 
   var
-  src        = document.getElementById('src'),
-  template   = config.map.template,
-  subdomains = [ 'a.', 'b.', 'c.' ],
-  provider   = new MM.TemplatedLayer(template, subdomains);
+  src             = document.getElementById('src'),
+  subdomains      = [ 'a.', 'b.', 'c.' ],
+  baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
+  intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate));
 
-  map = new MM.Map(document.getElementById(config.map.id), provider);
+  map = new MM.Map(document.getElementById(config.map.id), baseLayer);
   map.setCenterZoom(new MM.Location(config.map.lat, config.map.lng), config.map.zoom);
 
-  var layer_adm = new MM.Layer(new MM.TemplatedMapProvider('http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png'));
-  map.insertLayerAt(1, layer_adm);
+  // Adds intersection layer
+  map.insertLayerAt(1, intersectsLayer);
 
   conflictmaps = new ConflictMaps();
 
   // Fetch all data
   conflictmaps.bind('reset', onDataLoaded);
   conflictmaps.fetch();
+
 }
 
 function onDataLoaded() {
