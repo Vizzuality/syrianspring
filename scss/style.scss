@@ -50,7 +50,14 @@ aside {
     border-top: 1px solid $cGray4;
   }
 
-  #play_button{ position: absolute; bottom: 0px; left: 0; width: 5px; height: 5px; background: #b90b77; -moz-border-radius: 3px; border-radius: 3px; }
+  #play_button{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 1px;
+    height: 120px;
+    background: url(../img/line.png);
+  }
 
   .legend {
 
@@ -71,6 +78,7 @@ aside {
 
 // Tell the SVG path to be a thin blue line without any area fill
 path {stroke-width: 1;fill: none;}
+
 .data1 {stroke: #FF9900;}
 .data2 {stroke: #eb0d4d;}
 
