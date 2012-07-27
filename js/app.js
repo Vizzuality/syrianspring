@@ -378,7 +378,7 @@ function start() {
   playButton.onclick = "";
 
   progressLine = document.getElementById('progress');
-  progressLine.className = "show";
+  progressLine.className = "fadeIn";
 
   // Main loop
   (function animloop(){
