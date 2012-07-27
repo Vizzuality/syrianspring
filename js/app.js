@@ -1,12 +1,16 @@
 var
 conflictmaps,
 map      = null,
+overlay  = null,
 config   = {
   username: 'viz2',
-  lat:  34,
-  lng:  35,
-  zoom: 6,
-  template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
+  map: {
+    id: 'map',
+    lat:  34,
+    lng:  35,
+    zoom: 6,
+    template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
+  },
   graph: {
     width: 164,
     height: 120
@@ -269,16 +273,46 @@ Overlay.prototype = {
 }
 
 function initMap() {
+
   var
   src        = document.getElementById('src'),
-  template   = config.template,
+  template   = config.map.template,
   subdomains = [ 'a.', 'b.', 'c.' ],
   provider   = new MM.TemplatedLayer(template, subdomains);
 
-  map = new MM.Map(document.getElementById('map'), provider);
-  map.setCenterZoom(new MM.Location(config.lat, config.lng), config.zoom);
+  map = new MM.Map(document.getElementById(config.map.id), provider);
+  map.setCenterZoom(new MM.Location(config.map.lat, config.map.lng), config.map.zoom);
 
-  var hash = new MM.Hash(map);
+  conflictmaps = new ConflictMaps();
+
+  // Fetch all data
+  conflictmaps.bind('reset', loadGraph);
+  conflictmaps.fetch();
+}
+
+function loadGraph() {
+
+  overlay  = new Overlay(map, conflictmaps);
+  overlay.graph('graph')
+
+}
+
+function renderLayer() {
+
+  var moveMap = setInterval(function() {
+
+    var of = overlay.time;
+
+    overlay.setTime(30000000);
+
+    if (overlay.time < of) {
+      overlay.time = this.conflictmaps.first().time.getTime();
+    }
+
+    overlay.draw(map);
+
+  }, 20);
+
 }
 
 function start(type) {
@@ -291,38 +325,7 @@ function start(type) {
   var progress = document.getElementById('progress');
   progress.className = "show";
 
-  if (type == 'replay'){
-
-    conflictmaps = new ConflictMaps();
-
-    var setup_layer = function() {
-
-      var
-      f  = new Overlay(map, conflictmaps);
-      to = 0,
-      ai = null;
-
-      f.graph('graph')
-
-      var moveMap = setInterval(function() {
-
-        var of = f.time;
-
-        f.setTime(30000000);
-
-        if (f.time < of){
-          f.time = this.conflictmaps.first().time.getTime();
-        }
-
-        f.draw(map);
-      },20);
-
-    };
-
-    // Fetch all data
-    conflictmaps.bind('reset', setup_layer);
-    conflictmaps.fetch();
-  }
+  renderLayer();
 }
 
 
