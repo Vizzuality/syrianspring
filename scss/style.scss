@@ -67,6 +67,8 @@ aside {
 
     background: transparent;
     border-top: 1px solid $cGray4;
+
+    z-index: 1000;
   }
 
   #progress {
