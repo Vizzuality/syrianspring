@@ -1,0 +1,581 @@
+/* line 17, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* line 20, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+}
+
+/* line 22, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 24, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 26, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 28, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 101, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 30, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 114, ../../../.rvm/gems/ruby-1.9.2-p320@global/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 3, ../scss/style.scss */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* line 5, ../scss/style.scss */
+body {
+  line-height: 1;
+}
+
+/* line 7, ../scss/style.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 9, ../scss/style.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 11, ../scss/style.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 13, ../scss/style.scss */
+q, blockquote {
+  quotes: none;
+}
+
+/* line 14, ../scss/style.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 16, ../scss/style.scss */
+a img {
+  border: none;
+}
+
+/* line 18, ../scss/style.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 20, ../scss/style.scss */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #242424;
+}
+
+/* line 22, ../scss/style.scss */
+body {
+  font-family: "Helvetica Neue", "Helvetica", Arial;
+}
+
+/* line 23, ../scss/style.scss */
+body div#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 24, ../scss/style.scss */
+body div#tooltip {
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  width: 151px;
+  -moz-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  -webkit-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  -o-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  background: white;
+  z-index: 10;
+}
+
+/* line 25, ../scss/style.scss */
+body div#tooltip h3 {
+  display: block;
+  font: bold 11px "Helvetica Neue", "Helvetica", Arial;
+  color: #FF3366;
+  text-transform: uppercase;
+}
+
+/* line 26, ../scss/style.scss */
+body div#tooltip h2 {
+  display: block;
+  width: 100%;
+  padding: 4px 0 14px 0;
+  font: bold 21px "Helvetica Neue", "Helvetica", Arial;
+  line-height: 23px;
+  color: #333333;
+  border-bottom: 2px solid #FF3366;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 27, ../scss/style.scss */
+body div#tooltip p {
+  display: block;
+  margin: 18px 0 0 0;
+  font: normal 14px "Helvetica Neue", "Helvetica", Arial;
+  color: #666666;
+}
+
+/* line 28, ../scss/style.scss */
+body div#tooltip span.cash {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  vertical-align: middle;
+  height: 14px;
+  width: 9px;
+  margin: 6px 0 0 0;
+  background: url("../img/cash.png") repeat 0 0;
+}
+
+/* line 29, ../scss/style.scss */
+body div#tooltip span.cash {
+  *display: inline;
+}
+
+/* line 30, ../scss/style.scss */
+body div#tooltip span.arrow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  margin: 0 0 0 -5px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid white;
+}
+
+/* line 32, ../scss/style.scss */
+body aside {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 43px;
+  width: 270px;
+  height: 180px;
+  background: none;
+  -moz-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  -webkit-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  -o-box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  box-shadow: rgba(222, 222, 222, 0.2) 0 0 0 5px;
+  z-index: 100;
+}
+
+/* line 33, ../scss/style.scss */
+body aside header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 62px;
+  background: url("../img/stripes.png") repeat 0 0 #333333;
+  border-bottom: 2px solid rgba(222, 222, 222, 0.2);
+}
+
+/* line 35, ../scss/style.scss */
+body aside header .row {
+  position: relative;
+  float: left;
+  width: 270px;
+  color: white;
+  font-family: "Bank Gothic", "Futura", "Arial";
+  opacity: .9;
+  margin-left: 0px;
+}
+
+/* line 36, ../scss/style.scss */
+body aside header .row .column {
+  position: relative;
+  padding: 15px 14px 15px 14px;
+  float: left;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* line 37, ../scss/style.scss */
+body aside header .row .column .value {
+  position: relative;
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+
+/* line 38, ../scss/style.scss */
+body aside header .row .column .title {
+  position: relative;
+  opacity: .6;
+}
+
+/* line 39, ../scss/style.scss */
+body aside header .row .verticle {
+  position: relative;
+  float: left;
+  height: 62px;
+  width: 2px;
+  background: #000;
+}
+
+/* line 40, ../scss/style.scss */
+body aside section #death_toll {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: transparent;
+}
+
+/* line 43, ../scss/style.scss */
+body aside section #scroll_bar {
+  position: absolute;
+  top: 170px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: transparent;
+}
+
+/* line 46, ../scss/style.scss */
+body aside section #scroll_bar #play_button {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #b90b77;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* tell the SVG path to be a thin blue line without any area fill */
+/* line 51, ../scss/style.scss */
+path {
+  stroke-width: 1;
+  fill: none;
+}
+
+/* line 52, ../scss/style.scss */
+.data1 {
+  stroke: #FF9900;
+}
+
+/* line 53, ../scss/style.scss */
+.data2 {
+  stroke: #eb0d4d;
+}
+
+/* line 57, ../scss/style.scss */
+body aside h3 {
+  display: block;
+  font: bold 11px "Helvetica Neue", "Helvetica", Arial;
+  color: #FF3366;
+  text-transform: uppercase;
+}
+
+/* line 58, ../scss/style.scss */
+body aside section.types {
+  position: absolute;
+  top: 248px;
+  bottom: 125px;
+  left: 0;
+  width: 200px;
+  padding: 5px 0 20px;
+  overflow-x: visible;
+  overflow-y: auto;
+  outline: none;
+}
+
+/* line 59, ../scss/style.scss */
+body aside section.types ul {
+  display: block;
+  padding: 0;
+}
+
+/* line 60, ../scss/style.scss */
+body aside section.types ul li {
+  margin: 15px 0 0 0;
+}
+
+/* line 61, ../scss/style.scss */
+body aside section.types ul li a {
+  display: block;
+  padding: 0 20px;
+  font: bold 11px "Helvetica Neue", "Helvetica", Arial;
+  color: #666666;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* line 62, ../scss/style.scss */
+body aside section.types ul li a:hover {
+  color: #333333;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* line 63, ../scss/style.scss */
+body aside section.types ul li a.selected {
+  color: #FF3366;
+  text-decoration: none;
+  background: url("../img/list.png") no-repeat 9px 6px;
+  list-style: square;
+}
+
+/* line 64, ../scss/style.scss */
+body aside section.types ul li a.selected:hover {
+  color: #FF3366;
+  text-decoration: none;
+}
+
+/* line 66, ../scss/style.scss */
+.lt-ie9 div#tooltip span.arrow {
+  bottom: -9px;
+}
+
+/*other stuff*/
+/*Marker infowindow*/
+/* line 72, ../scss/style.scss */
+div.cartodb_infowindow {
+  position: absolute;
+  display: block;
+  width: 214px;
+  padding: 0;
+  visibility: hidden;
+}
+
+/* line 73, ../scss/style.scss */
+div.cartodb_infowindow a.close {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  width: 22px;
+  height: 15px;
+  padding: 4px 0 3px 0;
+  text-align: center;
+  font: bold 15px "Helvetica",Arial;
+  color: #666666;
+  text-decoration: none;
+  line-height: 15px;
+}
+
+/* line 74, ../scss/style.scss */
+div.cartodb_infowindow a.close:hover {
+  color: #333333;
+}
+
+/* line 75, ../scss/style.scss */
+div.cartodb_infowindow div.outer_top {
+  width: 186px;
+  padding: 25px 18px 5px 10px;
+  background: url("sprite.png") 0 top;
+}
+
+/* line 76, ../scss/style.scss */
+div.cartodb_infowindow div.top {
+  width: 186px;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* line 77, ../scss/style.scss */
+div.cartodb_infowindow div.top .jspTrack {
+  background: #dddddd;
+}
+
+/* line 78, ../scss/style.scss */
+div.cartodb_infowindow div.top .jspDrag {
+  background: #999999;
+}
+
+/* line 79, ../scss/style.scss */
+div.cartodb_infowindow div.top .jspHover, div.cartodb_infowindow div.top .jspActive {
+  background: #666666;
+}
+
+/* line 80, ../scss/style.scss */
+div.cartodb_infowindow div.top label {
+  display: block;
+  width: auto;
+  padding: 0 0 0 5px;
+  font: normal 11px Arial;
+  color: #B3B3B3;
+  text-shadow: 0 1px white;
+}
+
+/* line 81, ../scss/style.scss */
+div.cartodb_infowindow div.top p {
+  display: block;
+  width: 170px;
+  max-height: 20px;
+  padding: 2px 4px;
+  margin: 2px 0 7px;
+  font: bold 11px 'Helvetica',Arial;
+  color: #666666;
+  border: none;
+  background: none;
+  text-shadow: 0 1px white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* line 83, ../scss/style.scss */
+div.cartodb_infowindow div.top p.empty {
+  font-weight: normal;
+  font-style: italic;
+  color: #b7b7b7;
+}
+
+/*div.cartodb_infowindow div.top p:focus {border:1px solid #666666; border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;}*/
+/* line 85, ../scss/style.scss */
+div.cartodb_infowindow div.bottom {
+  width: 180px;
+  height: 36px;
+  padding: 11px 16px 10px 10px;
+  background: url("sprite.png") no-repeat right top;
+}
+
+/* line 86, ../scss/style.scss */
+div.cartodb_infowindow div.bottom label {
+  float: left;
+  margin: 5px 0 0 3px;
+  font: normal 11px Arial;
+  color: #B3B3B3;
+  text-shadow: 0 1px white;
+}
+
+/* line 87, ../scss/style.scss */
+div.cartodb_infowindow div.bottom label strong {
+  font: bold 11px 'Helvetica',Arial;
+  color: #666666;
+  text-shadow: 0 1px white;
+}
+
+/* line 88, ../scss/style.scss */
+div.cartodb_infowindow div.bottom a {
+  float: right;
+  height: 12px;
+  margin: 0 5px 0 0;
+  padding: 4px 7px;
+  border: 1px solid #999;
+  font: bold 11px "Helvetica",Arial;
+  color: #333333;
+  text-align: center;
+  text-decoration: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-shadow: 0 1px white;
+  background: linear-gradient(-90deg, #ffffff, #cacbce);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, from(white), to(#cacbce));
+  background: -moz-linear-gradient(-90deg, white, #cacbce);
+  background: -o-linear-gradient(white, #cacbce);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FFFFFF', endColorstr='#CACBCE');
+}
+
+/* line 91, ../scss/style.scss */
+div.cartodb_infowindow div.bottom a:hover {
+  background: linear-gradient(-90deg, #cacbce, #ffffff);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, from(#cacbce), to(white));
+  background: -moz-linear-gradient(-90deg, #cacbce, white);
+  background: -o-linear-gradient(#cacbce, white);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#CACBCE', endColorstr='#FFFFFF');
+  cursor: pointer;
+}
+
+/* line 93, ../scss/style.scss */
+a.cartodb_logo {
+  position: absolute;
+  bottom: 8px;
+  left: 75px;
+  display: block;
+  width: 69px;
+  height: 27px;
+  background: url("http://cartodb.s3.amazonaws.com/embed/embed_sprite.png") no-repeat -61px 0;
+  text-indent: -9999px;
+  line-height: 0;
+  font-size: 0;
+}
+
+/* line 95, ../scss/style.scss */
+div.torque_time {
+  position: absolute;
+  bottom: 28px;
+  right: 15px;
+  display: block;
+  width: 189px;
+  height: 27px;
+}
