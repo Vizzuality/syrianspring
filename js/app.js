@@ -1,8 +1,9 @@
 var
 conflictmaps,
-map        = null,
-overlay    = null,
-playButton = null;
+map          = null,
+overlay      = null,
+playButton   = null,
+progressLine = null;
 
 var config = {
   username: 'viz2',
@@ -270,9 +271,54 @@ Overlay.prototype = {
     lastTime  = this.conflictmaps.last().time.getTime(),
     offset    = Math.ceil(config.graph.width * (self.time - firstTime) / (lastTime - firstTime))
 
-    $('#progress').css('left', offset + "px");
+    if (progressLine) progressLine.style.left = offset + "px";
   }
 }
+
+var Clock = Class.extend({
+  init: function(){
+  },
+  setId: function(divid){
+    this.divid = divid;
+  },
+  clear: function() {
+    //$('#'+torque.clock.divid).html('');
+  },
+  loading: function() {
+    //todo
+  },
+  setSecond: function(second) {
+    $('#'+this.divid + " .second").html(lpad(second,2));
+  },
+  setMinute: function(minute) {
+    $('#'+this.divid + " .minute").html(lpad(minute,2));
+  },
+  setHour: function(hour) {
+    $('#'+this.divid + " .hour").html(lpad(hour,2));
+  },
+  setDay: function(day) {
+    //console.log(day)
+    $('#'+this.divid + " .day").html(lpad(day,2));
+  },
+  setMonth: function(month) {
+    $('#'+this.divid + " .month").html(lpad(month,2));
+  },
+  setYear: function(year) {
+    year = (year.length < 4 ? '0' : '') + year;
+    $('#'+this.divid + " .year").html(lpad(year,4));
+  },
+  set: function(date) {
+    this._moveHand(date);
+  },
+  _moveHand: function(date) {
+    this.setSecond(date.getSeconds());
+    this.setMinute(date.getMinutes());
+    this.setHour(date.getHours());
+    this.setDay(date.getDate());
+    this.setMonth(date.getMonth());
+    this.setYear(date.getFullYear());
+  }
+});
 
 function initMap() {
 
@@ -321,68 +367,22 @@ function renderLoop() {
   overlay.draw(map);
 }
 
-function start(type) {
+function start() {
 
+  clock = new Clock();
   clock.setId('clock');
 
   playButton = document.getElementById('play');
   playButton.className = "fadeOut";
   playButton.onclick = "";
 
-  var progress = document.getElementById('progress');
-  progress.className = "show";
+  progressLine = document.getElementById('progress');
+  progressLine.className = "show";
 
   // Main loop
   (function animloop(){
     requestAnimationFrame(animloop);
     renderLoop();
   })();
-
 }
 
-var Clock = Class.extend({
-  init: function(){
-  },
-  setId: function(divid){
-    this.divid = divid;
-  },
-  clear: function() {
-    //$('#'+torque.clock.divid).html('');
-  },
-  loading: function() {
-    //todo
-  },
-  setSecond: function(second) {
-    $('#'+this.divid + " .second").html(lpad(second,2));
-  },
-  setMinute: function(minute) {
-    $('#'+this.divid + " .minute").html(lpad(minute,2));
-  },
-  setHour: function(hour) {
-    $('#'+this.divid + " .hour").html(lpad(hour,2));
-  },
-  setDay: function(day) {
-    //console.log(day)
-    $('#'+this.divid + " .day").html(lpad(day,2));
-  },
-  setMonth: function(month) {
-    $('#'+this.divid + " .month").html(lpad(month,2));
-  },
-  setYear: function(year) {
-    year = (year.length < 4 ? '0' : '') + year;
-    $('#'+this.divid + " .year").html(lpad(year,4));
-  },
-  set: function(date) {
-    this._moveHand(date);
-  },
-  _moveHand: function(date) {
-    this.setSecond(date.getSeconds());
-    this.setMinute(date.getMinutes());
-    this.setHour(date.getHours());
-    this.setDay(date.getDate());
-    this.setMonth(date.getMonth());
-    this.setYear(date.getFullYear());
-  }
-});
-
-clock = new Clock();
