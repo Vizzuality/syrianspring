@@ -1,3 +1,4 @@
+@import "compass";
 @import "compass/reset";
 @import "compass/css3";
 @import "helpers";
@@ -8,12 +9,13 @@ body { font-family: "Helvetica", "Helvetica", Arial; }
 
 #map { width: 100%; height: 100%; }
 
-a.cartodb_logo {position:absolute; bottom:8px; left:75px; display:block; width:69px; height:27px; background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0; text-indent:-9999px; line-height:0; font-size:0;}
+.cartodb_logo {
+  @include size(69px, 27px);
+  @include position(false, false, 15px, 15px);
 
-/* tell the SVG path to be a thin blue line without any area fill */
-path {stroke-width: 1;fill: none;}
-.data1 {stroke: #FF9900;}
-.data2 {stroke: #eb0d4d;}
+  background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
+  text-indent:-9999px;
+}
 
 aside {
   $padding: 20px;
@@ -28,28 +30,47 @@ aside {
   h1 {
     font-size: 21px;
     font-weight: bold;
-    margin: 0 0 5px 0;
+    margin: 0 0 10px 0;
   }
 
-  #graph { position:relative; height: 120px; background: transparent; margin: 0 0 10px 0; }
-
-  #play_button{ position: absolute; bottom: 0px; left: 0; width: 5px; height: 5px; background: #b90b77; -moz-border-radius: 3px; border-radius: 3px; }
-
   #clock {
+    margin: 0 0 10px 0;
+
     font-size: 15px;
     font-weight: bold;
     color: $cGray3;
-
-    .column { display: inline; }
   }
 
+  #graph {
+    position:relative;
+    height: 120px;
+    margin: 0 0 15px 0;
+
+    background: transparent;
+    border-top: 1px solid $cGray4;
+  }
+
+  #play_button{ position: absolute; bottom: 0px; left: 0; width: 5px; height: 5px; background: #b90b77; -moz-border-radius: 3px; border-radius: 3px; }
+
   .legend {
+
     li {
       font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
       font-size: 13px;
       color: $cGray1;
+
+      padding: 0 0 0 13px;
+      margin: 0 0 3px 0;
+
+      &.civilian { @include icons-sprite(bullet-yellow, $offset-y: 3px); }
+      &.children { @include icons-sprite(bullet-pink,   $offset-y: 3px); }
     }
 
   }
-
 }
+
+// Tell the SVG path to be a thin blue line without any area fill
+path {stroke-width: 1;fill: none;}
+.data1 {stroke: #FF9900;}
+.data2 {stroke: #eb0d4d;}
+

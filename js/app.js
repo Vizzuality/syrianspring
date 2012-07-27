@@ -1,8 +1,8 @@
 var
 userName = 'viz2',
 config   = {
-  lat:  34.626932,
-  lng:  36.76869,
+  lat:  34,
+  lng:  33,
   zoom: 6
 };
 
