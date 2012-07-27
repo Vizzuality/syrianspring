@@ -6,7 +6,11 @@ config   = {
   lat:  34,
   lng:  35,
   zoom: 6,
-  template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png'
+  template: 'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
+  graph: {
+    width: 164,
+    height: 120
+  }
 };
 
 var CartoDB = Backbone.CartoDB({ user: config.username });
@@ -121,6 +125,7 @@ function Overlay(map, conflictmaps) {
 
   // Create container for the graph
   this.div = document.createElement('div');
+
   this.div.style.position = 'absolute';
   this.div.style.width    =  map.dimensions.x + "px";
   this.div.style.height   = map.dimensions.y + "px";
@@ -165,8 +170,8 @@ Overlay.prototype = {
 
     var // margins and dimensions
     m = [0, 0, 0, 0],
-    w = 164 - m[1] - m[3],
-    h = 120 - m[0] - m[2];
+    w = config.graph.width  - m[1] - m[3],
+    h = config.graph.height - m[0] - m[2];
 
     var
     x = d3.time.scale().domain([startTime, endTime]).range([0, w]),
@@ -257,7 +262,7 @@ Overlay.prototype = {
     var // calculate the offset
     firstTime = this.conflictmaps.first().time.getTime(),
     lastTime  = this.conflictmaps.last().time.getTime(),
-    offset    = Math.ceil(262 * (self.time - firstTime) / (lastTime - firstTime))
+    offset    = Math.ceil(config.graph.width * (self.time - firstTime) / (lastTime - firstTime))
 
     $('#progress').css('left', offset + "px");
   }
