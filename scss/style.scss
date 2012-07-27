@@ -10,10 +10,13 @@ body { font-family: "Helvetica", "Helvetica", Arial; }
 #map { width: 100%; height: 100%; }
 
 .cartodb_logo {
+  opacity: 0;
+
   @include size(69px, 27px);
   @include position(false, false, 15px, 15px);
 
   background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
+
   text-indent:-9999px;
 }
 
@@ -125,6 +128,18 @@ path {stroke-width: 1;fill: none;}
 @-ms-keyframes fadeOut     { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
 @-o-keyframes fadeOut      { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
 @keyframes fadeOut         { 0%   { opacity: 1; } 50%  { opacity: 0.5; } 100% { opacity: 0; } }
+
+.slowFadeIn {
+  -webkit-animation: fadeIn 500ms ease-in-out 1500ms;
+  -moz-animation:    fadeIn 500ms ease-in-out 1500ms;
+  -o-animation:      fadeIn 500ms ease-in-out 1500ms;
+  animation:         fadeIn 500ms ease-in-out 1500ms;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
 
 .fadeIn {
   -webkit-animation: fadeIn 500ms ease-in-out 500ms;
