@@ -43,8 +43,13 @@ aside {
     color: $cGray3;
   }
 
+  .graph_container {
+    position:relative;
+  }
+
   #spinner {
-    @include absolute-center(24px, 24px);
+    @include size(24px);
+    @include position(45px, false, false, 70px);
     background: url(../img/spinner.gif) no-repeat;
   }
 

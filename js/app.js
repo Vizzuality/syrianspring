@@ -340,9 +340,6 @@ function initMap() {
 
 function onDataLoaded() {
 
-  var spinner = document.getElementById('spinner');
-  spinner.className = "fadeOut";
-
   overlay  = new Overlay(map, conflictmaps);
   overlay.graph('graph')
 
@@ -351,6 +348,9 @@ function onDataLoaded() {
 
   playButton = document.getElementById('play');
   playButton.className = "fadeIn";
+
+  var spinner = document.getElementById('spinner');
+  spinner.className = "fadeOut";
 
 }
 
