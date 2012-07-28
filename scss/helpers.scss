@@ -107,14 +107,21 @@ $icons-play_active-spacing:   25px;
   animation-fill-mode: forwards;
 }
 
-.lt-ie10 .cartodb_logo, aside, #play, #graph, #spinner, #progress {
-  &.fadeIn, &.slowFadeIn {
-    @include opacity(1);
-  }
-}
+// ie hacks
+.lt-ie10 {
 
-.lt-ie10 .cartodb_logo, aside, #play, #graph, #spinner, #progress {
-  &.fadeOut {
+  .cartodb_logo, aside, #play, #graph, #progress {
     @include opacity(0);
+  }
+
+  .cartodb_logo, aside, #play, #graph, #spinner, #progress {
+
+    &.fadeIn, &.slowFadeIn {
+      @include opacity(1);
+    }
+
+    &.fadeOut {
+      @include opacity(0);
+    }
   }
 }

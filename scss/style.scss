@@ -12,10 +12,6 @@ body { font-family: "Helvetica", Arial, sans-serif; }
   @include opacity(0);
 }
 
-.lt-ie10 .cartodb_logo, aside, #play, #graph, #progress {
-  @include opacity(0);
-}
-
 .cartodb_logo {
 
   @include size(69px, 27px);
