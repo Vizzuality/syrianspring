@@ -9,7 +9,11 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 #map { width: 100%; height: 100%; }
 
 .cartodb_logo, aside, #play, #graph, #progress {
-  opacity: 0;
+  @include opacity(0);
+}
+
+.lt-ie10 .cartodb_logo, aside, #play, #graph, #progress {
+  @include opacity(0);
 }
 
 .cartodb_logo {

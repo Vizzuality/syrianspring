@@ -1,58 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+  <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+    <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+      <!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+        <!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+        <!--[if gt IE 9]><!--> <html class="no-js gt-ie9 non-ie" lang="en"> <!--<![endif]-->
+          <head>
 
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <title>Arab Spring conflicts civilian casualties</title>
-    <meta name="description" content="Arab Spring conflicts civilian casualties">
-    <meta name="author" content="Vizzuality">
+            <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+            <title>Arab Spring conflicts civilian casualties</title>
+            <meta name="description" content="Arab Spring conflicts civilian casualties">
+            <meta name="author" content="Vizzuality">
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+            <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <!--
-    <script src="js/libs/d3.v2.min.js"></script>
-    <script src="js/libs/jquery.min.js"></script>
-    <script src="js/libs/underscore-min.js"></script>
-    <script src="js/libs/backbone-min.js"></script>
-    <script src="js/libs/backbone.cartodb.js"></script>
-    <script src="js/libs/class.js"></script>
-    <script type="text/javascript" src="js/libs/modestmaps.js"></script>
-    <script type="text/javascript" src="js/helpers.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    -->
+            <!--
+            <script src="js/libs/d3.v2.min.js"></script>
+            <script src="js/libs/jquery.min.js"></script>
+            <script src="js/libs/underscore-min.js"></script>
+            <script src="js/libs/backbone-min.js"></script>
+            <script src="js/libs/backbone.cartodb.js"></script>
+            <script src="js/libs/class.js"></script>
+            <script type="text/javascript" src="js/libs/modestmaps.js"></script>
+            <script type="text/javascript" src="js/helpers.js"></script>
+            <script type="text/javascript" src="js/app.js"></script>
+            -->
 
-  </head>
-  <body onload="initMap();">
-    <div id="map"></div>
+          </head>
+          <body onload="initMap();">
+            <div id="map"></div>
 
-    <aside class="fadeIn">
+            <aside class="fadeIn">
 
-    <h1>Arab Spring conflicts civilian casualties</h1>
+            <h1>Arab Spring conflicts civilian casualties</h1>
 
-    <div id="clock">
-      <span class="value day">01</span>/<span class="value month">01</span>/<span class="value year">2001</span>
-    </div>
+            <div id="clock">
+              <span class="value day">01</span>/<span class="value month">01</span>/<span class="value year">2001</span>
+            </div>
 
-    <div class="graph_container">
-      <div id="graph">
-        <div id="progress"></div>
-        <a href="#" id="play" onclick="start();"></a>
-      </div>
-      <div id="spinner"></div>
-    </div>
+            <div class="graph_container">
+              <div id="graph">
+                <div id="progress"></div>
+                <a href="#" id="play" onclick="start();"></a>
+              </div>
+              <div id="spinner"></div>
+            </div>
 
-    <ul class="legend">
-      <li class="civilian">civilian casualities</li>
-      <li class="children">children (<18) killed</li>
-    </ul>
+            <ul class="legend">
+              <li class="civilian">civilian casualities</li>
+              <li class="children">children (<18) killed</li>
+            </ul>
 
-    </aside>
+            </aside>
 
-    <a class="cartodb_logo slowFadeIn" href="http://www.cartodb.com" target="_blank">CartoDB</a>
+            <a class="cartodb_logo slowFadeIn" href="http://www.cartodb.com" target="_blank">CartoDB</a>
 
-    <script type="text/javascript" src="js/all.js"></script>
+            <script type="text/javascript" src="js/all.js"></script>
 
-  </body>
-</html>
+          </body>
+        </html>
 
