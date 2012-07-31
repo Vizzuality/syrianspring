@@ -4,6 +4,10 @@ map          = null,
 overlay      = null,
 playButton   = null,
 progressLine = null;
+counters     = {};
+
+totalCivilians = 0;
+totalChildren = 0;
 
 var config = {
   username: 'viz2',
@@ -103,7 +107,8 @@ var ConflictMaps = CartoDB.CartoDBCollection.extend({
     active   = [],
     inactive = [];
 
-    this.each(function(m) {
+    for (var i = 0; i < this.models.length; i++) {
+      var m = this.models[i];
 
       if (m.isActive(t)) {
         active.push({ 'id': m.id , 'data': m });
@@ -111,7 +116,7 @@ var ConflictMaps = CartoDB.CartoDBCollection.extend({
         inactive.push({ 'id': m.id , 'data': m });
       }
 
-    });
+    }
 
     return {'active':active,'inactive':inactive};
   },
@@ -152,7 +157,7 @@ function Overlay(map, conflictmaps) {
 
   this.setTime = function(n){
 
-    if ( self.conflictmaps.last().time.getTime() < self.time){
+    if ( self.conflictmaps.last().time.getTime() < self.time ){
       self.time = self.conflictmaps.first().time.getTime();
     } else{
       self.time = self.time+n;
@@ -251,6 +256,9 @@ Overlay.prototype = {
       p  = eq.getPos(self.time);
 
       p = map.coordinatePoint(map.locationCoordinate(p));
+
+      updateCounters(val.data);
+
       return "translate(" + p.x + "," + p.y +")";
 
     });
@@ -260,22 +268,6 @@ Overlay.prototype = {
 
     this.svg.selectAll('g').selectAll('circle')
     .attr("r", function(b) {
-
-      var
-      tollCount     = parseInt(b.data.get("toll"), 10),
-      childrenCount = parseInt(b.data.get("child_deaths"), 10);
-
-      var
-      civilians      = document.getElementById('counter_civilians'),
-      totalCivilians = parseInt(civilians.innerHTML, 10) + tollCount,
-      children       = document.getElementById('counter_children'),
-      totalChildren  = parseInt(children.innerHTML, 10) + childrenCount;
-
-      civilians.innerHTML = totalCivilians;
-      children.innerHTML  = totalChildren;
-
-      var total       = document.getElementById('counter_total');
-      total.innerHTML = totalCivilians + totalChildren;
 
       return b.data.scaleAt(self.time);
 
@@ -339,6 +331,20 @@ var Clock = Class.extend({
   }
 });
 
+function updateCounters(data) {
+
+  var
+  tollCount     = data.get("toll");
+  childrenCount = data.get("child_deaths");
+
+  totalCivilians += tollCount;
+  totalChildren  += childrenCount;
+
+  counters.civilians.innerHTML = totalCivilians;
+  counters.children.innerHTML  = totalChildren;
+  counters.total.innerHTML     = totalCivilians + totalChildren;
+}
+
 // Method to build the map
 function initMap() {
 
@@ -373,11 +379,15 @@ function onDataLoaded() {
   graph = document.getElementById('graph');
   graph.className = "fadeIn";
 
-  counters = document.getElementById('counters');
-  counters.className = "fadeIn";
+  counter = document.getElementById('counters');
+  counter.className = "fadeIn";
 
   playButton = document.getElementById('play');
   playButton.className = "fadeIn";
+
+  counters.civilians = document.getElementById('counter_civilians');
+  counters.children  = document.getElementById('counter_children');
+  counters.total     = document.getElementById('counter_total');
 
   var spinner = document.getElementById('spinner');
   spinner.className = "fadeOut";

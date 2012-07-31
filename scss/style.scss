@@ -66,13 +66,13 @@ aside {
 
       text-align: right;
 
-      font-size: 15px;
+      font-size: 13px;
       font-weight: bold;
       font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 
       &.civilians { color: #FFA900; }
       &.children  { color: #FF3366; }
-      &.total     { color: #333333; border: none; }
+      &.total     { color: #333333; padding-right: 0; border: none; }
     }
   }
 
