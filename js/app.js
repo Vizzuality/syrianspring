@@ -92,7 +92,7 @@ var ConflictMaps = CartoDB.CartoDBCollection.extend({
     inactive = [];
 
     this.each(function(m) {
-      toll.push([new Date(m.get('timestamp')).getTime(),m.get('toll'), m.get('child_deaths')]);
+      toll.push([new Date(m.get('timestamp')).getTime(), m.get('toll'), m.get('child_deaths')]);
     });
 
     return toll;
@@ -260,7 +260,25 @@ Overlay.prototype = {
 
     this.svg.selectAll('g').selectAll('circle')
     .attr("r", function(b) {
+
+      var
+      tollCount     = parseInt(b.data.get("toll"), 10),
+      childrenCount = parseInt(b.data.get("child_deaths"), 10);
+
+      var
+      civilians      = document.getElementById('counter_civilians'),
+      totalCivilians = parseInt(civilians.innerHTML, 10) + tollCount,
+      children       = document.getElementById('counter_children'),
+      totalChildren  = parseInt(children.innerHTML, 10) + childrenCount;
+
+      civilians.innerHTML = totalCivilians;
+      children.innerHTML  = totalChildren;
+
+      var total       = document.getElementById('counter_total');
+      total.innerHTML = totalCivilians + totalChildren;
+
       return b.data.scaleAt(self.time);
+
     })
     .attr('style', function(b) {
       var o = b.data.opacity(self.time);
@@ -354,6 +372,9 @@ function onDataLoaded() {
 
   graph = document.getElementById('graph');
   graph.className = "fadeIn";
+
+  counters = document.getElementById('counters');
+  counters.className = "fadeIn";
 
   playButton = document.getElementById('play');
   playButton.className = "fadeIn";

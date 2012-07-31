@@ -8,7 +8,7 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 
 #map { width: 100%; height: 100%; }
 
-.cartodb_logo, aside, #play, #graph, #progress {
+.cartodb_logo, aside, #play, #graph, #progress, #counters {
   @include opacity(0);
 }
 
@@ -26,7 +26,7 @@ aside {
 
   $padding: 20px;
 
-  @include size(207px - $padding*2, 304px - $padding*2);
+  @include size(207px - $padding*2, false);
   @include position(15px, false, false, 15px);
 
   padding: $padding;
@@ -35,7 +35,7 @@ aside {
   @include border-radius(5px);
 
   h1 {
-    margin: 0 0 10px 0;
+    margin: 0 0 16px 0;
 
     font-size: 21px;
     font-weight: bold;
@@ -51,6 +51,29 @@ aside {
 
   .graph_container {
     position:relative;
+  }
+
+  #counters {
+    margin: 0 0 15px 0;
+
+    li {
+
+      @include inline-block();
+      width: 40px;
+      padding: 0 5px;
+
+      border-right: 1px dotted #ccc;
+
+      text-align: right;
+
+      font-size: 15px;
+      font-weight: bold;
+      font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+
+      &.civilians { color: #FFA900; }
+      &.children  { color: #FF3366; }
+      &.total     { color: #333333; border: none; }
+    }
   }
 
   #spinner {
@@ -106,8 +129,9 @@ aside {
       padding: 0 0 0 13px;
       margin: 0 0 3px 0;
 
-      &.civilian { @include icons-sprite(bullet-yellow, $offset-y: 3px); }
-      &.children { @include icons-sprite(bullet-pink,   $offset-y: 3px); }
+      &.civilians { @include icons-sprite(bullet-yellow, $offset-y: 3px); }
+      &.children  { @include icons-sprite(bullet-pink,   $offset-y: 3px); }
+      &.total     { @include icons-sprite(bullet-black,   $offset-y: 3px); }
     }
   }
 }
