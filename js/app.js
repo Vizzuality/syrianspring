@@ -122,7 +122,8 @@ var ConflictMaps = CartoDB.CartoDBCollection.extend({
   },
 
   model: ConflictMap,
-  sql: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll AS toll, cartodb_id as id, child_deaths, females FROM syrianspring ORDER BY event ASC"
+  //sql: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll AS toll, cartodb_id as id, child_deaths, females FROM syrianspring ORDER BY event ASC"
+  sql: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll,toll_acc, cartodb_id as id, child_deaths, child_deaths_acc FROM syrianspring ORDER BY event ASC"
 
 });
 
@@ -334,15 +335,15 @@ var Clock = Class.extend({
 function updateCounters(data) {
 
   var
-  tollCount     = data.get("toll");
-  childrenCount = data.get("child_deaths");
+  tollCount     = data.get("toll_acc");
+  childrenCount = data.get("child_deaths_acc");
 
-  totalCivilians += tollCount;
-  totalChildren  += childrenCount;
+  //counters.progress.innerHTML  = data.get("toll");
 
-  counters.civilians.innerHTML = totalCivilians;
-  counters.children.innerHTML  = totalChildren;
-  counters.total.innerHTML     = totalCivilians + totalChildren;
+  counters.children.innerHTML  = childrenCount;
+  counters.civilians.innerHTML = tollCount;
+  counters.total.innerHTML     = childrenCount + tollCount;
+
 }
 
 // Method to build the map
@@ -388,6 +389,8 @@ function onDataLoaded() {
   counters.civilians = document.getElementById('counter_civilians');
   counters.children  = document.getElementById('counter_children');
   counters.total     = document.getElementById('counter_total');
+
+  //counters.progress  = document.getElementById('progress_count');
 
   var spinner = document.getElementById('spinner');
   spinner.className = "fadeOut";
