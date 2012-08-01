@@ -1,3 +1,4 @@
+
 var
 conflictmaps,
 map          = null,
@@ -418,6 +419,7 @@ function start() {
   clock = new Clock();
   clock.setId('clock');
 
+  // Show play button
   playButton = document.getElementById('play');
   playButton.className   = "fadeOut";
   playButton.onclick     = "";
