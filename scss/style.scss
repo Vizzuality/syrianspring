@@ -8,7 +8,7 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 
 #map { width: 100%; height: 100%; }
 
-.cartodb_logo, aside, #play, #graph, #progress, #counters {
+.cartodb_logo, aside, #graph, #progress, #counters {
   @include opacity(0);
 }
 
@@ -130,6 +130,13 @@ aside {
     &:hover:active { @include icons-sprite(play_active); }
 
     &.hidden { display: none; }
+
+    &.pause {
+      @include icons-sprite(pause);
+
+      &:hover  { @include icons-sprite(pause_hover);}
+      &:hover:active { @include icons-sprite(pause_active); }
+    }
 
   }
 
