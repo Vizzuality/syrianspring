@@ -1,5 +1,6 @@
 
 var
+play         = true,
 conflictmaps,
 map          = null,
 overlay      = null,
@@ -335,6 +336,14 @@ var Clock = Class.extend({
   }
 });
 
+function stop() {
+  play = !play;
+
+  $("#play").toggleClass("pause");
+
+  if (play) loop();
+}
+
 function zoomIn() {
   map.setZoom(map.getZoom() + 1);
 }
@@ -395,7 +404,7 @@ function onDataLoaded() {
   counter.className = "fadeIn";
 
   playButton = document.getElementById('play');
-  playButton.className = "fadeIn";
+  //playButton.className = "fadeIn";
 
   counters.civilians = document.getElementById('counter_civilians');
   counters.children  = document.getElementById('counter_children');
@@ -422,23 +431,39 @@ function renderLoop() {
   overlay.draw(map);
 }
 
+function loop() {
+
+  (function animloop(){
+    if (play) {
+      requestAnimationFrame(animloop);
+      renderLoop();
+    }
+  })();
+
+}
+
 function start() {
 
   clock = new Clock();
   clock.setId('clock');
 
-  // Show play button
   playButton = document.getElementById('play');
-  playButton.className   = "fadeOut";
-  playButton.onclick     = "";
-  playButton.onmouseover = function() { this.style.cursor = 'default'; }
+  playButton.onclick = function() { stop(); }
+  $("#play").addClass("pause");
+
+
+  $("aside").on("mouseenter", function() {
+    $("#play").fadeIn(150);
+  });
+  $("aside").on("mouseleave", function() {
+  if (play) {
+    $("#play").fadeOut(150);
+    }
+  });
+
 
   progressLine = document.getElementById('progress');
   progressLine.className = "fadeIn";
 
-  // Main loop
-  (function animloop(){
-    requestAnimationFrame(animloop);
-    renderLoop();
-  })();
+  loop();
 }
