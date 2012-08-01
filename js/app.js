@@ -22,7 +22,9 @@ var config = {
     lng:  36.5,
     zoom: 7,
     baseTemplate:       'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
-    intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png'
+    intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png',
+    totalTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_toll_layer/{Z}/{X}/{Y}.png',
+    childTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_childs_layer/{Z}/{X}/{Y}.png',
   },
   graph: {
     width: 164,
@@ -366,6 +368,8 @@ function initMap() {
   location        = new MM.Location(config.map.lat, config.map.lng),
   baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
   intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate));
+  totalLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.totalTemplate));
+  childLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.childTemplate));
 
   // Create the map with the base layer
   map = new MM.Map(document.getElementById(config.map.id), baseLayer);
@@ -373,6 +377,8 @@ function initMap() {
 
   // Adds the intersection layer
   map.insertLayerAt(1, intersectsLayer);
+  map.insertLayerAt(2, totalLayer);
+  map.insertLayerAt(3, childLayer);
 
   conflictmaps = new ConflictMaps();
 
