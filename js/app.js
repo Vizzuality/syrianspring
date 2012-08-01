@@ -27,7 +27,7 @@ var config = {
     baseTemplate:       'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
     intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png',
     totalTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_toll_layer/{Z}/{X}/{Y}.png',
-    childTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_childs_layer/{Z}/{X}/{Y}.png',
+    childTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_childs_layer/{Z}/{X}/{Y}.png'
   },
   graph: {
     width: 164,
