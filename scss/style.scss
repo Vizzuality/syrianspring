@@ -163,6 +163,13 @@ aside {
   font-family: "Helvetica", Arial, sans-serif;
 
   @include border-radius(3px 3px 0 0);
+
+  -webkit-transition: color 250ms ease-in-out;
+  -moz-transition:    color 250ms ease-in-out;
+  -o-transition:      color 250ms ease-in-out;
+  transition:         color 250ms ease-in-out;
+
+  &:hover { color: #ccc; }
 }
 
 // Tell the SVG path to be a thin blue line without any area fill
