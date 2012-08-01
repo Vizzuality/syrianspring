@@ -11,6 +11,10 @@ totalChildren = 0;
 
 var config = {
   username: 'viz2',
+
+  query: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll, " +
+         "toll_acc, cartodb_id AS id, child_deaths, child_deaths_acc " +
+         "FROM syrianspring ORDER BY event ASC",
   map: {
     id: 'map',
     lat:  34,
@@ -122,8 +126,7 @@ var ConflictMaps = CartoDB.CartoDBCollection.extend({
   },
 
   model: ConflictMap,
-  //sql: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll AS toll, cartodb_id as id, child_deaths, females FROM syrianspring ORDER BY event ASC"
-  sql: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll,toll_acc, cartodb_id as id, child_deaths, child_deaths_acc FROM syrianspring ORDER BY event ASC"
+  sql: config.query
 
 });
 
@@ -300,32 +303,31 @@ var Clock = Class.extend({
     //todo
   },
   setSecond: function(second) {
-    $('#'+this.divid + " .second").html(lpad(second,2));
+    $('#'+ this.divid + " .second").html(lpad(second, 2));
   },
   setMinute: function(minute) {
-    $('#'+this.divid + " .minute").html(lpad(minute,2));
+    $('#'+ this.divid + " .minute").html(lpad(minute, 2));
   },
   setHour: function(hour) {
-    $('#'+this.divid + " .hour").html(lpad(hour,2));
+    $('#'+ this.divid + " .hour").html(lpad(hour, 2));
   },
   setDay: function(day) {
-    //console.log(day)
-    $('#'+this.divid + " .day").html(lpad(day,2));
+    $('#'+ this.divid + " .day").html(lpad(day, 2));
   },
   setMonth: function(month) {
-    $('#'+this.divid + " .month").html(lpad(month,2));
+    $('#'+ this.divid + " .month").html(lpad(month + 1, 2));
   },
   setYear: function(year) {
     year = (year.length < 4 ? '0' : '') + year;
-    $('#'+this.divid + " .year").html(lpad(year,4));
+    $('#'+ this.divid + " .year").html(lpad(year,4));
   },
   set: function(date) {
     this._moveHand(date);
   },
   _moveHand: function(date) {
-    this.setSecond(date.getSeconds());
-    this.setMinute(date.getMinutes());
-    this.setHour(date.getHours());
+    //this.setSecond(date.getSeconds());
+    //this.setMinute(date.getMinutes());
+    //this.setHour(date.getHours());
     this.setDay(date.getDate());
     this.setMonth(date.getMonth());
     this.setYear(date.getFullYear());

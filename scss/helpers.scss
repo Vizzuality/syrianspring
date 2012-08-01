@@ -63,14 +63,14 @@ $icons-play_active-spacing:   25px;
 
 // Animations
 @-webkit-keyframes fadeIn { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
-@-moz-keyframes fadeIn    { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
-@-o-keyframes fadeIn      { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
-@keyframes fadeIn         { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
+@-moz-keyframes    fadeIn { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
+@-o-keyframes      fadeIn { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
+@keyframes         fadeIn { from { @include opacity(0); } 50%  { opacity: 0.5; } to { @include opacity(1); } }
 
 @-webkit-keyframes fadeOut { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
-@-moz-keyframes fadeOut    { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
-@-o-keyframes fadeOut      { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
-@keyframes fadeOut         { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
+@-moz-keyframes    fadeOut { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
+@-o-keyframes      fadeOut { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
+@keyframes         fadeOut { from { @include opacity(1); } 50%  { opacity: 0.5; } to { @include opacity(0); } }
 
 .slowFadeIn {
   -webkit-animation: fadeIn 500ms ease-in-out 1500ms;
