@@ -18,9 +18,9 @@ var config = {
          "FROM syrianspring ORDER BY event ASC",
   map: {
     id: 'map',
-    lat:  34,
-    lng:  35,
-    zoom: 6,
+    lat:  34.6,
+    lng:  36.5,
+    zoom: 7,
     baseTemplate:       'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
     intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png'
   },
