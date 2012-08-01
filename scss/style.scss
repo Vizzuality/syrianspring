@@ -186,7 +186,7 @@ aside {
   $zoomWidth: 43px;
   $zoomHeight: 36px; // distance from the top of the canvas until the middle line
 
-  @include position(15px, 15px, false, false);
+  @include position(10px, 10px, false, false);
 
   $url: "../img/map-zoom.png";
 

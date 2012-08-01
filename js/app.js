@@ -335,6 +335,14 @@ var Clock = Class.extend({
   }
 });
 
+function zoomIn() {
+  map.setZoom(map.getZoom() + 1);
+}
+
+function zoomOut() {
+  map.setZoom(map.getZoom() - 1);
+}
+
 function updateCounters(data) {
 
   var
