@@ -114,11 +114,11 @@ $icons-play_active-spacing:   25px;
 // ie hacks
 .lt-ie10 {
 
-  .cartodb_logo, aside, #play, #graph, #progress, #counters {
+  .cartodb_logo, aside, #graph, #progress, #counters {
     @include opacity(0);
   }
 
-  .cartodb_logo, aside, #play, #graph, #spinner, #progress, #counters {
+  .cartodb_logo, aside, #graph, #spinner, #progress, #counters {
 
     &.fadeIn, &.slowFadeIn {
       @include opacity(1);
