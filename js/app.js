@@ -2,7 +2,9 @@
 var
 play         = true,
 conflictmaps,
+removeLayers = false,
 map          = null,
+layers       = {},
 overlay      = null,
 playButton   = null,
 progressLine = null;
@@ -338,8 +340,14 @@ var Clock = Class.extend({
   }
 });
 
-function stop() {
+function toggleAnimation() {
   play = !play;
+
+  if (removeLayers) {
+    map.removeLayerAt(2);
+    map.removeLayerAt(2);
+    removeLayers = false;
+  }
 
   $("#play").toggleClass("pause");
 
@@ -374,20 +382,19 @@ function initMap() {
   var
   src             = document.getElementById('src'),
   subdomains      = [ 'a.', 'b.', 'c.' ],
-  location        = new MM.Location(config.map.lat, config.map.lng),
-  baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
-  intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate));
-  totalLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.totalTemplate));
-  childLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.childTemplate));
+  location        = new MM.Location(config.map.lat, config.map.lng);
+
+  layers.baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
+  layers.intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate)),
+  layers.totalLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.totalTemplate)),
+  layers.childLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.childTemplate));
 
   // Create the map with the base layer
-  map = new MM.Map(document.getElementById(config.map.id), baseLayer);
+  map = new MM.Map(document.getElementById(config.map.id), layers.baseLayer);
   map.setCenterZoom(location, config.map.zoom);
 
   // Adds the intersection layer
-  map.insertLayerAt(1, intersectsLayer);
-  map.insertLayerAt(2, totalLayer);
-  map.insertLayerAt(3, childLayer);
+  map.insertLayerAt(1, layers.intersectsLayer);
 
   conflictmaps = new ConflictMaps();
 
@@ -428,10 +435,20 @@ function renderLoop() {
 
   var of = overlay.time;
 
-  overlay.setTime(30000000);
+  overlay.setTime(35000000);
 
   if (overlay.time < of) {
+
+    play = false;
+    $("#play").removeClass("pause");
+
+    map.insertLayerAt(2, layers.totalLayer);
+    map.insertLayerAt(3, layers.childLayer);
+
+    removeLayers = true;
+
     overlay.time = this.conflictmaps.first().time.getTime();
+
   }
 
   overlay.draw(map);
@@ -454,19 +471,20 @@ function start() {
   clock.setId('clock');
 
   playButton = document.getElementById('play');
-  playButton.onclick = function() { stop(); }
+  playButton.onclick = function() { toggleAnimation(); }
+
   $("#play").addClass("pause");
 
 
   $("aside").on("mouseenter", function() {
     $("#play").fadeIn(150);
   });
+
   $("aside").on("mouseleave", function() {
-  if (play) {
-    $("#play").fadeOut(150);
+    if (play) {
+      $("#play").fadeOut(150);
     }
   });
-
 
   progressLine = document.getElementById('progress');
   progressLine.className = "fadeIn";
