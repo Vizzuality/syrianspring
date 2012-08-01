@@ -1,7 +1,10 @@
 
 var
+play         = true,
 conflictmaps,
+removeLayers = false,
 map          = null,
+layers       = {},
 overlay      = null,
 playButton   = null,
 progressLine = null;
@@ -22,7 +25,9 @@ var config = {
     lng:  36.5,
     zoom: 7,
     baseTemplate:       'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
-    intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png'
+    intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png',
+    totalTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_toll_layer/{Z}/{X}/{Y}.png',
+    childTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_childs_layer/{Z}/{X}/{Y}.png',
   },
   graph: {
     width: 164,
@@ -334,6 +339,20 @@ var Clock = Class.extend({
   }
 });
 
+function toggleAnimation() {
+  play = !play;
+
+  if (removeLayers) {
+    map.removeLayerAt(2);
+    map.removeLayerAt(2);
+    removeLayers = false;
+  }
+
+  $("#play").toggleClass("pause");
+
+  if (play) loop();
+}
+
 function zoomIn() {
   map.setZoom(map.getZoom() + 1);
 }
@@ -362,16 +381,19 @@ function initMap() {
   var
   src             = document.getElementById('src'),
   subdomains      = [ 'a.', 'b.', 'c.' ],
-  location        = new MM.Location(config.map.lat, config.map.lng),
-  baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
-  intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate));
+  location        = new MM.Location(config.map.lat, config.map.lng);
+
+  layers.baseLayer       = new MM.TemplatedLayer(config.map.baseTemplate, subdomains),
+  layers.intersectsLayer = new MM.Layer(new MM.TemplatedMapProvider(config.map.intersectsTemplate)),
+  layers.totalLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.totalTemplate)),
+  layers.childLayer      = new MM.Layer(new MM.TemplatedMapProvider(config.map.childTemplate));
 
   // Create the map with the base layer
-  map = new MM.Map(document.getElementById(config.map.id), baseLayer);
+  map = new MM.Map(document.getElementById(config.map.id), layers.baseLayer);
   map.setCenterZoom(location, config.map.zoom);
 
   // Adds the intersection layer
-  map.insertLayerAt(1, intersectsLayer);
+  map.insertLayerAt(1, layers.intersectsLayer);
 
   conflictmaps = new ConflictMaps();
 
@@ -394,7 +416,7 @@ function onDataLoaded() {
   counter.className = "fadeIn";
 
   playButton = document.getElementById('play');
-  playButton.className = "fadeIn";
+  //playButton.className = "fadeIn";
 
   counters.civilians = document.getElementById('counter_civilians');
   counters.children  = document.getElementById('counter_children');
@@ -412,13 +434,34 @@ function renderLoop() {
 
   var of = overlay.time;
 
-  overlay.setTime(30000000);
+  overlay.setTime(35000000);
 
   if (overlay.time < of) {
+
+    play = false;
+    $("#play").removeClass("pause");
+
+    map.insertLayerAt(2, layers.totalLayer);
+    map.insertLayerAt(3, layers.childLayer);
+
+    removeLayers = true;
+
     overlay.time = this.conflictmaps.first().time.getTime();
+
   }
 
   overlay.draw(map);
+}
+
+function loop() {
+
+  (function animloop(){
+    if (play) {
+      requestAnimationFrame(animloop);
+      renderLoop();
+    }
+  })();
+
 }
 
 function start() {
@@ -426,18 +469,24 @@ function start() {
   clock = new Clock();
   clock.setId('clock');
 
-  // Show play button
   playButton = document.getElementById('play');
-  playButton.className   = "fadeOut";
-  playButton.onclick     = "";
-  playButton.onmouseover = function() { this.style.cursor = 'default'; }
+  playButton.onclick = function() { toggleAnimation(); }
+
+  $("#play").addClass("pause");
+
+
+  $("aside").on("mouseenter", function() {
+    $("#play").fadeIn(150);
+  });
+
+  $("aside").on("mouseleave", function() {
+    if (play) {
+      $("#play").fadeOut(150);
+    }
+  });
 
   progressLine = document.getElementById('progress');
   progressLine.className = "fadeIn";
 
-  // Main loop
-  (function animloop(){
-    requestAnimationFrame(animloop);
-    renderLoop();
-  })();
+  loop();
 }
