@@ -273,10 +273,9 @@ Overlay.prototype = {
 
     this.svg.selectAll('g').selectAll('circle')
     .attr("r", function(b) {
-
       return b.data.scaleAt(self.time);
-
     })
+
     .attr('style', function(b) {
       var o = b.data.opacity(self.time);
       return "fill: #FF9900; fill-opacity: " + o + "; stroke-opacity: " + o;
