@@ -74,13 +74,7 @@ Backbone.CartoDB = function(options, query, cache) {
               }
             });
         } else {
-             // TODO: add timeout
-             $.getJSON(resource_url + '?q=' + encodeURIComponent(sql) + '&callback=?')
-             .success(callback)
-             .fail(function(){
-                    callback();
-             }).complete(function() {
-             });
+           callback(data);
         }
     };
 
