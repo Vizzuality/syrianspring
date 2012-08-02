@@ -39,7 +39,7 @@ var config = {
   }
 };
 
-var CartoDB = Backbone.CartoDB({ path: "http://d2c5ry9dy1ewvi.cloudfront.net/api/v2/sql"});
+var CartoDB = Backbone.CartoDB({ path: ""});
 
 var ConflictMap = CartoDB.CartoDBModel.extend({
 
