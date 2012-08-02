@@ -13,21 +13,25 @@ counters     = {};
 totalCivilians = 0;
 totalChildren = 0;
 
+cloudFrontURL = "http://d2c5ry9dy1ewvi.cloudfront.net";
+vizzURL       = "http://vizz2.cartodb.com";
+
 var config = {
   username: 'viz2',
 
   query: "SELECT event at time zone 'EDT' AS timestamp, ST_AsGeoJson(the_geom) AS position, toll, " +
-         "toll_acc, cartodb_id AS id, child_deaths, child_deaths_acc " +
-         "FROM syrianspring ORDER BY event ASC",
+    "toll_acc, cartodb_id AS id, child_deaths, child_deaths_acc " +
+    "FROM syrianspring ORDER BY event ASC",
+
   map: {
     id: 'map',
     lat:  34.6,
     lng:  36.5,
     zoom: 7,
     baseTemplate:       'http://{S}tiles.mapbox.com/v3/cartodb.map-byl8dnag/{Z}/{X}/{Y}.png',
-    intersectsTemplate: 'http://viz2.cartodb.com/tiles/syria_intersects/{Z}/{X}/{Y}.png',
-    totalTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_toll_layer/{Z}/{X}/{Y}.png',
-    childTemplate:      'http://viz2.cartodb.com/tiles/syrianspring_aggregated_childs_layer/{Z}/{X}/{Y}.png'
+    intersectsTemplate: cloudFrontURL + '/tiles/syria_intersects/{Z}/{X}/{Y}.png',
+    totalTemplate:      cloudFrontURL + '/tiles/syrianspring_aggregated_toll_layer/{Z}/{X}/{Y}.png',
+    childTemplate:      cloudFrontURL + '/tiles/syrianspring_aggregated_childs_layer/{Z}/{X}/{Y}.png'
   },
   graph: {
     width: 164,
@@ -35,7 +39,7 @@ var config = {
   }
 };
 
-var CartoDB = Backbone.CartoDB({ user: config.username });
+var CartoDB = Backbone.CartoDB({ path: "http://d2c5ry9dy1ewvi.cloudfront.net/api/v2/sql"});
 
 var ConflictMap = CartoDB.CartoDBModel.extend({
 
